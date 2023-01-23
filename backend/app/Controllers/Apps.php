@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\AppModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
-use Config\App;
 
 class Apps extends ResourceController
 {
@@ -32,7 +31,7 @@ class Apps extends ResourceController
     {
         $model = new AppModel();
         $data = $model->find(['id' => $id]);
-        if(!$data) return $this->failNotFound('No Data Found');
+        if (!$data) return $this->failNotFound('No Data Found');
         return $this->respond($data[0]);
     }
 
@@ -68,7 +67,7 @@ class Apps extends ResourceController
             'os' => $this->request->getVar('os'),
             'jenis' => $this->request->getVar('jenis'),
         ];
-        if(!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
         $model = new AppModel();
         $model->save($data);
         $response = [
@@ -113,10 +112,10 @@ class Apps extends ResourceController
             'os' => $this->request->getVar('os'),
             'jenis' => $this->request->getVar('jenis'),
         ];
-        if(!$this->validate($rules)) return $this->fail($this->validator->getErrors());
+        if (!$this->validate($rules)) return $this->fail($this->validator->getErrors());
         $model = new AppModel();
         $findById = $model->find(['id' => $id]);
-        if(!$findById) return $this->failNotFound('No Data Found');
+        if (!$findById) return $this->failNotFound('No Data Found');
         $model->update($id, $data);
         $response = [
             'status' => 200,
@@ -137,7 +136,7 @@ class Apps extends ResourceController
     {
         $model = new AppModel();
         $findById = $model->find(['id' => $id]);
-        if(!$findById) return $this->failNotFound('No Data Found');
+        if (!$findById) return $this->failNotFound('No Data Found');
         $model->delete($id);
         $response = [
             'status' => 200,
